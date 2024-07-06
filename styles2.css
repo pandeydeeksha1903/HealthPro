@@ -1,0 +1,123 @@
+/* Reset default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Apply background image to the body */
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Set position to relative for absolute positioning inside */
+    height: 100vh;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the header and navigation bar */
+header {
+    background-color: rgba(255, 26, 205, 0.5);
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffc107;
+}
+
+/* Style for the main content section */
+main {
+    text-align: center;
+}
+
+.hero {
+    position: relative; /* Set position to relative for absolute positioning inside */
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.content {
+    position: absolute;
+    top: 50%; /* Position content vertically centered */
+    left: 78%; /* Position content horizontally centered */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 10px;
+}
+
+.hero h1 {
+    font-size: 36px;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+.signin-overlay {
+    border-radius: 20px; /* Rounded corners */
+    padding: 20px;
+    margin-top: -170px;
+}
+
+.sign-in-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in-form label {
+    margin-bottom: 10px;
+    color: black;
+}
+
+.sign-in-form input[type="email"],
+.sign-in-form input[type="password"] {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.8); /* Light background color */
+}
+
+.sign-in-form input[type="email"]:focus,
+.sign-in-form input[type="password"]:focus {
+    outline: none;
+}
+
+.sign-in-form button[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    background: linear-gradient(to right, #FF69B4, #FFC0CB); /* Light pink gradient on hover */
+    color: #fff; /* White text color */
+    cursor: pointer;
+}
+
+.sign-in-form button[type="submit"]:hover {
+    background: linear-gradient(to right, #e30a77, #FFC0CB); /* Light pink gradient on hover */
+}
+

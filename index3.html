@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Calorie Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: pink;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .calorie-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .calorie-info h2 {
+            margin-top: 0;
+        }
+
+        .calorie-info p {
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="user"></h1>
+        <div class="calorie-info">
+            <h2>Calories Left:</h2>
+            <p><strong>Calories Left:</strong> <span id="caloriesLeft"></span></p>
+        </div>
+        <div class="calorie-info">
+            <h2>Selected Calorie Type and Value:</h2>
+            <p><strong>Type:</strong> <span id="calorieType"></span></p>
+            <p><strong>Value:</strong> <span id="calorieValue"></span></p>
+        </div>
+        <div class="calorie-info" id="foodList">
+            <h2>Selected Food Items:</h2>
+            <!-- Food items will be added dynamically here -->
+        </div>
+        <div class="nutrients">
+            <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+        <div class="button-container">
+            <button onclick="goToHomePage()">Go to Home Page</button>
+            <button onclick="goToAddMealPage()">Go to Add Meal Page</button>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve calorie type and value from localStorage
+        const calorieType = localStorage.getItem('selectedType');
+        const calorieValue = localStorage.getItem('selectedCalorieValue');
+        const user = localStorage.getItem('user');
+        const foodListJSON = localStorage.getItem('mealList');
+
+        // Update HTML elements with retrieved data
+        document.getElementById('calorieType').textContent = calorieType;
+        document.getElementById('calorieValue').textContent = calorieValue;
+        document.getElementById('user').textContent = "Welcome " + user;
+
+        if (foodListJSON) {
+            const foodList = JSON.parse(foodListJSON);
+            // Loop through the food items and add them to the list
+            const foodListContainer = document.getElementById('foodList');
+            let totalCalories = 0;
+            let totalNutrients = {
+                carbohydrates: 0,
+                cholesterol: 0,
+                saturatedFat: 0,
+                totalFat: 0,
+                potassium: 0,
+                protein: 0,
+                sodium: 0,
+                sugar: 0,
+                fiber: 0
+            };
+
+            foodList.forEach(food => {
+                totalCalories += food.calorie; // Add calories of each food item
+
+                // Add nutrients of each food item to the total
+                Object.keys(totalNutrients).forEach(nutrient => {
+                    totalNutrients[nutrient] += Number(food.nutrients[nutrient]) || 0;
+                });
+
+                const foodItem = document.createElement('div');
+                foodItem.classList.add('food-item');
+                foodItem.innerHTML = `
+                    <p><strong>Name:</strong> ${food.name}</p>
+                    <p><strong>Calories:</strong> ${food.calorie}</p>
+                    <hr/>
+                `;
+                foodListContainer.appendChild(foodItem);
+            });
+
+            // Calculate remaining calories
+            const caloriesLeft = calorieValue - totalCalories;
+            document.getElementById('caloriesLeft').textContent = caloriesLeft;
+
+            // Render the chart with total nutrients
+            renderChart(totalNutrients);
+        } else {
+            console.log("No food items found in localStorage.");
+        }
+
+        function renderChart(data) {
+            const ctx = document.getElementById('myChart2').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Carbohydrates', 'Cholesterol', 'Saturated Fat', 'Total Fat', 'Fiber', 'Potassium', 'Protein', 'Sodium', 'Sugar'],
+                    datasets: [{
+                        label: 'Nutritional Values',
+                        data: [
+                            data.carbohydrates,
+                            data.cholesterol,
+                            data.saturatedFat,
+                            data.totalFat,
+                            data.fiber,
+                            data.potassium,
+                            data.protein,
+                            data.sodium,
+                            data.sugar
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(0, 255, 0, 0.2)',
+                            'rgba(0, 0, 255, 0.2)',
+                            'rgba(255, 0, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(0, 0, 255, 1)',
+                            'rgba(255, 0, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function goToHomePage() {
+            window.location.href = 'index.html'; // Redirect to home page
+        }
+
+        function goToAddMealPage() {
+            window.location.href = 'index4.html'; // Redirect to add meal page
+        }
+    </script>
+</body>
+</html>

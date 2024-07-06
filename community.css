@@ -1,0 +1,125 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.community-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: radial-gradient(circle, rgb(255, 182, 243) 0%, rgb(255, 192, 236) 50%, rgb(255, 225, 247) 100%);
+    color: black;
+    text-align: center;
+}
+
+header {
+    padding: 20px;
+    background: rgba(252, 106, 191, 0.8);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+footer {
+    padding: 10px;
+    background: rgba(255,182,193,0.8);
+}
+
+.community-content {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.post-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+}
+
+.posts {
+    margin-top: 20px;
+}
+
+.post {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-text {
+    margin-bottom: 10px;
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-actions button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.comment-form input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+}
+
+.comments {
+    margin-bottom: 10px;
+}
+
+.comment {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}

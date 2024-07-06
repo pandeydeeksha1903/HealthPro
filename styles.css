@@ -1,0 +1,125 @@
+/* Reset default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Apply background image to the body */
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Set position to relative for absolute positioning inside */
+    height: 100vh;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the header and navigation bar */
+header {
+    background-color: rgba(255, 26, 205, 0.5);
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffc107;
+}
+
+/* Style for the main content section */
+main {
+    text-align: center;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12px;
+}
+
+.hero {
+    position: relative; /* Set position to relative for absolute positioning inside */
+}
+
+.top-image {
+    position: absolute;
+    width: 150px; /* Adjust width as needed */
+    z-index: 1; /* Ensure images are above the background image */
+    margin-top: -150px;
+}
+
+.top-image-1 {
+    top: 1200px;
+    left: 1%;
+    width: 220px;
+}
+
+.top-image-2 {
+    top: 1200px;
+    left: 20%;
+    width: 220px;
+}
+
+.top-image-3 {
+    top: 1193px;
+    left: 40%;
+    width: 220px;
+}
+
+.top-image-4 {
+    top: 1200px;
+    left: 60%;
+    width: 220px;
+}
+
+.top-image-5{
+    top: 1200px;
+    left: 80%;
+    width: 220px;
+}
+
+
+.background-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 0; /* Ensure background image is behind other content */
+}
+
+.content {
+    position: absolute;
+    top: 50%; /* Position content vertically centered */
+    left: 50%; /* Position content horizontally centered */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    margin-top: 10;
+    font-size: 36px;
+}
+
+.hero p {
+    font-size: 20px;
+}

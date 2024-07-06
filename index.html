@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <nav class="header">
+            <div>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div id="login-container">
+                <!-- Login button will be inserted here if user is not logged in -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <!-- Top Images above the background image -->
+            <a href="final_calorie_cal.html">
+                <img src="ig1.png" alt="" class="top-image top-image-1">
+            </a>
+            <a href="index4.html">
+                <img src="ig2.png" alt="" class="top-image top-image-2">
+            </a>
+            <a href="index3.html">
+                <img src="ig3.png" alt="" class="top-image top-image-3">
+            </a>
+            
+            <a href="ask.html">
+                <img src="ig4.png" alt="" class="top-image top-image-4">
+            </a>
+            
+            <a href="community.html">
+                <img src="community.png" alt="" class="top-image top-image-5">
+            </a>
+            <img src="imgmain.png" alt="Background Image" class="background-image">
+            <div class="content">
+      
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Check if user exists in localStorage
+        var user = localStorage.getItem("user");
+        if (user) {
+            // If user exists, create a text node with the username
+            var textNode = document.createTextNode("Welcome, " + user);
+            // Get the login container
+            var loginContainer = document.getElementById("login-container");
+            // Append the username text node to the login container
+            loginContainer.appendChild(textNode);
+        } else {
+            // If user doesn't exist, create a login button
+            var loginButton = document.createElement("button");
+            loginButton.textContent = "Login";
+            // Create a link for the login button
+            var loginLink = document.createElement("a");
+            loginLink.href = "index2.html";
+            // Append the login button to the link
+            loginLink.appendChild(loginButton);
+            // Append the link to the login container
+            document.getElementById("login-container").appendChild(loginLink);
+        }
+    </script>
+
+</body>
+</html>
